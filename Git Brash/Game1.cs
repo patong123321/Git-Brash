@@ -9,6 +9,11 @@ namespace Git_Brash
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
+        Texture2D ballTexture;
+        Texture2D charTexture;
+        Vector2 charPosition = new Vector2(0, 250);
+        Vector2[] ballPosition = new Vector2[4];
+        int[] ballcolor = new int[4];
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -27,6 +32,9 @@ namespace Git_Brash
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            charTexture = Content.Load<Texture2D>("Char01");
+            ballTexture = Content.Load<Texture2D>("ball");
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -43,6 +51,14 @@ namespace Git_Brash
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            _spriteBatch.Begin();
+            _spriteBatch.Draw(charTexture, charPosition, new Rectangle(32 , 48 , 32, 48), Color.White);
+            for (int i = 0; i < 4; i++)
+            {
+                _spriteBatch.Draw(ballTexture, ballPosition[i], new Rectangle(24 * ballcolor[i], 0, 24, 24), Color.White);
+            }
+            _spriteBatch.End();
 
             // TODO: Add your drawing code here
 
