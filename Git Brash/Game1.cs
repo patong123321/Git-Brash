@@ -53,7 +53,7 @@ namespace Git_Brash
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _spriteBatch.Begin();
-            _spriteBatch.Draw(charTexture, charPosition, new Rectangle(32 , 48 , 32, 48), Color.White);
+            _spriteBatch.Draw(charTexture, charPosition, new Rectangle(32, 48, 32, 48), Color.White);
             for (int i = 0; i < 4; i++)
             {
                 _spriteBatch.Draw(ballTexture, ballPosition[i], new Rectangle(24 * ballcolor[i], 0, 24, 24), Color.White);
