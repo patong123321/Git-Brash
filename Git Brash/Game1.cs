@@ -47,6 +47,7 @@ namespace Git_Brash
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
+            /*sawarddee krub*/
         }
     }
 }
