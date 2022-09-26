@@ -1,19 +1,20 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace Git_Brash
 {
-    public class Game1 : Game
+    public class Game1 : Microsoft.Xna.Framework.Game
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-
         Texture2D ballTexture;
         Texture2D charTexture;
         Vector2 charPosition = new Vector2(0, 250);
         Vector2[] ballPosition = new Vector2[4];
-        int[] ballcolor = new int[4];
+        int[] ballColor = new int[4];
+        Random rand = new Random();
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -35,6 +36,14 @@ namespace Git_Brash
             charTexture = Content.Load<Texture2D>("Char01");
             ballTexture = Content.Load<Texture2D>("ball");
 
+
+            for (int i = 0; i < 4; i++)
+            {
+                ballPosition[i].X = rand.Next(_graphics.GraphicsDevice.Viewport.Width - ballTexture.Width / 6);
+                ballPosition[i].Y = rand.Next(_graphics.GraphicsDevice.Viewport.Height - ballTexture.Height);
+                ballColor[i] = rand.Next(6);
+            }
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -42,9 +51,12 @@ namespace Git_Brash
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
-            // TODO: Add your update logic here
-
+            for (int i = 0; i < 4; i++)
+            {
+                ballPosition[i].X = rand.Next(_graphics.GraphicsDevice.Viewport.Width - ballTexture.Width / 6);
+                ballPosition[i].Y = rand.Next(_graphics.GraphicsDevice.Viewport.Height - ballTexture.Height);
+                ballColor[i] = rand.Next(6);
+            }
             base.Update(gameTime);
         }
 
@@ -56,7 +68,7 @@ namespace Git_Brash
             _spriteBatch.Draw(charTexture, charPosition, new Rectangle(32, 48, 32, 48), Color.White);
             for (int i = 0; i < 4; i++)
             {
-                _spriteBatch.Draw(ballTexture, ballPosition[i], new Rectangle(24 * ballcolor[i], 0, 24, 24), Color.White);
+                _spriteBatch.Draw(ballTexture, ballPosition[i], new Rectangle(24 * ballColor[i], 0, 24, 24), Color.White);
             }
             _spriteBatch.End();
 
